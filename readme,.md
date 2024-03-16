@@ -1,4 +1,4 @@
-### This is a basic wattsapp Clone 
+### This is a Pinterest Clone 
 
 featuring register,login of a user, and a feed page to view all the Pins. (not responsive yet works better for big screen)
 
