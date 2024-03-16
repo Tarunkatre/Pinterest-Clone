@@ -5,16 +5,19 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport');
 var expressSession = require('express-session');
+var flash = require('connect-flash')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./models/users');
 
 var app = express();
 
+app.use(flash());
 app.use(expressSession({
   saveUninitialized: false,
   resave: false,
-  secret: 'lllll'
+  secret: 'lllll',
+  
 }))
 
 

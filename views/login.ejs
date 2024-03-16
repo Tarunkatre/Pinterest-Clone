@@ -146,6 +146,9 @@
       <label for="forgotForm">Forgot Password</label>
     </div>
     <button type="submit" class="btn">Login</button>
+    <%if(error){%>
+    <div class="div text-red-700 font-bold pt-3 text-center font-sans text-lg"><%= error%></div>
+    <%}%>
     <div class="link">
       <p>Don't have an account? <label for="registerForm">Register</label></p>
     </div>
@@ -167,6 +170,9 @@
       <label><input type="checkbox" required>I agree to terms & conditions</label>
     </div>
     <button type="submit" class="btn">Register</button>
+    <%if(error){%>
+    <div class="div text-red-700 font-bold pt-3 font-sans text-center text-lg"><%= error%></div>
+    <%}%>
     <div class="link">
       <p>Already have an account? <label for="loginForm">Login</label></p>
     </div>

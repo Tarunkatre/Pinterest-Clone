@@ -1,0 +1,44 @@
+<%include ./partials/header.ejs%>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    }
+
+    a:hover{
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+</style>
+<div class="post w-full h-min px-12 ">
+  <div class="post-container flex flex-wrap gap-5 bg-white rounded-lg p-10">
+        <%posts.forEach(function(post){%>
+            <a href="/userProfile/<%= post.user._id%>">
+        <div class="rounded-xl overflow-hidden w-72 h-min"><img class="w-min h-min" src="/images/upload/<%=post.postPic%>" alt="">
+        </div>
+        </a>
+        <%})%>
+      </div>
+    </div>
+<script>
+  function post(){
+    document.querySelector('#inp').click()
+  }
+  function edit(){
+    document.querySelector('#inpEdit').click()
+  }
+  document.querySelector('#inp').addEventListener('change',function(){
+    document.querySelector('#form').submit();
+  })
+  document.querySelector('#inpEdit').addEventListener('change',function(){
+    document.querySelector('#formEdit').submit();
+  })
+  document.querySelector('.profile-picture').addEventListener('mousemove',function(){
+    document.querySelector('#edit').style.display = 'initial';
+  })
+  document.querySelector('.profile-picture').addEventListener('mouseleave',function(){
+    document.querySelector('#edit').style.display = 'none';
+  })
+</script>
+<%include ./partials/footer.ejs%>

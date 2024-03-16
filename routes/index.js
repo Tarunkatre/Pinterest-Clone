@@ -2,42 +2,45 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var localStrategy = require('passport-local')
-var userModel = require('./users.js')
+var userModel = require('../models/users.js')
+var postModel = require('../models/posts.js')
+const upload = require('../multer.js')
+let {register,profile,post,edit,home,feed} = require('../controller/profile.js')
 
 passport.use(new localStrategy(userModel.authenticate()));
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('login');
-});
+router.get('/', home);
 
-router.get('/newAccount', function (req, res, next) {
-  res.render('register');
-});
+router.get('/profile',isLoggedIn, profile)
 
-router.post('/register', function (req, res, next) {
-  var user = {
-    username: req.body.username,
-    email: req.body.email
-  }
-  userModel.register(user, req.body.password)
-  .then((result) => {
-    passport.authenticate('local')(req, res, () => {
-      res.redirect('/profile')
-    })
-  }).catch((err) => {
-    res.send(err.message)
-  })
+router.get('/userProfile/:a',isLoggedIn, async function (req, res) {
+  const user = await userModel.findOne({ _id:req.params.a }).populate('posts')
+  res.render('userProfile', { user, nav: false })
 })
 
+router.get('/feed',isLoggedIn, feed)
+
+router.post('/post',upload.single('img'),isLoggedIn,post);
+
+router.post('/edit',upload.single('img'),edit)
+
+router.post('/register', register)
+
 router.post('/login', passport.authenticate('local', {
-  successRedirect: '/profile',
-  failureRedirect: '/'
+  successRedirect: '/feed',
+  failureRedirect: '/',
+  failureFlash:true,
 }), (req, res) => { })
 
-router.get('/logout', function (req, res, next) {
+router.get('/logout',function (req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    req.logOut(function(err){
+      if(err){return next(err);}
+      res.redirect('/');
+    })
+  }else{
+    res.send('error')
   }
 })
 
@@ -48,9 +51,5 @@ function isLoggedIn(req, res, next) {
     res.redirect('/')
   }
 }
-
-router.get('/profile',isLoggedIn, function (req, res) {
-  res.render('profile')
-})
 
 module.exports = router;

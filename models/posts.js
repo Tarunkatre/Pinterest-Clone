@@ -2,11 +2,14 @@ var mongoose = require('mongoose');
 
 
 const postSchema = mongoose.Schema({
-  postdata:String,
   likes:[{
     type:mongoose.Schema.Types.ObjectId,
     ref:'user'
   }],
+  user:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref:'user'
+  },
   postPic: String,
   createdAt: {
     type: Date,

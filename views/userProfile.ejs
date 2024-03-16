@@ -75,10 +75,10 @@
     </div>
     <h2 class="name"><%= user.username%></h2>
     <h3 class="email"><%= user.email%></h3>
-    <p class="tagline">Keep pinning.</p>
+    <p class="tagline">Keep going.</p>
     <div class="flex gap-5 justify-center"> 
-      <a href="#" class="button bg-red-500">Settings</a>
-      <button onclick="post()" class="button post bg-blue-600">Post</button>
+      <a href="#" class="button bg-red-500">Follow</a>
+      <button onclick="post()" class="button post bg-blue-600">Like</button>
       <form hidden id='form' action="/post" method="post" enctype="multipart/form-data">
         <input type="file" name="img" id="inp">
       </form>
