@@ -10,6 +10,15 @@
     a:hover{
       box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
+    @media (max-width: 1080px) {
+      .post-container{
+        padding: 0;
+        width: 100vw;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+      }
+    }
 </style>
 <div class="post w-full h-min px-12 ">
   <div class="post-container flex flex-wrap gap-5 bg-white rounded-lg p-10">
@@ -21,24 +30,5 @@
         <%})%>
       </div>
     </div>
-<script>
-  function post(){
-    document.querySelector('#inp').click()
-  }
-  function edit(){
-    document.querySelector('#inpEdit').click()
-  }
-  document.querySelector('#inp').addEventListener('change',function(){
-    document.querySelector('#form').submit();
-  })
-  document.querySelector('#inpEdit').addEventListener('change',function(){
-    document.querySelector('#formEdit').submit();
-  })
-  document.querySelector('.profile-picture').addEventListener('mousemove',function(){
-    document.querySelector('#edit').style.display = 'initial';
-  })
-  document.querySelector('.profile-picture').addEventListener('mouseleave',function(){
-    document.querySelector('#edit').style.display = 'none';
-  })
-</script>
+
 <%include ./partials/footer.ejs%>
